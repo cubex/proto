@@ -97,7 +97,10 @@ message RelationshipData {
 
 message RelationshipsResponse { repeated RelationshipData relationships = 1; }
 
-message RegistryActionResponse{}
+message RegistryActionResponse{
+  bool success = 1;
+  string message = 2;
+}
 
 service Registry {
   rpc Install(InstallRequest) returns (RegistryActionResponse);
