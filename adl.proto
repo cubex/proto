@@ -100,7 +100,7 @@ message ListRangeRequest{
 message ListAddResponse{}
 message ListRemoveResponse{}
 
-service Fdl{
+service Adl{
     rpc Mutate(MutationRequest) returns (MutationResponse);
     rpc Read(ReadRequest) returns (PropertiesResponse);
 
