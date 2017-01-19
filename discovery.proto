@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package discovery;
+
+option go_package = "github.com/cubex/proto-go/discovery";
+
+message RegisterRequest {
+    string app_id = 1;
+    string instance_uuid = 2;
+    string service_host = 3;
+    int32 service_port = 4;
+    AppVersion version = 5;
+}
+
+message DeRegisterRequest{
+    string app_id = 1;
+    string instance_uuid = 2;
+    AppVersion version = 3;
+}
+
+message HeartBeatRequest{
+    string app_id = 1;
+    string instance_uuid = 2;
+    AppVersion version = 3;
+}
+
+message LocationRequest{
+    string app_id = 1;
+    AppVersion version = 2;
+}
+
+enum ServiceStatus{
+    OFFLINE = 0;
+    ONLINE = 1;
+    DEGRADED_PERFORMANCE = 2;
+    PARTIAL_OUTAGE = 3;
+    UNDER_MAINTENANCE = 5;
+}
+
+enum AppVersion{
+    STABLE = 0;
+    BETA = 1;
+    ALPHA = 2;
+}
+
+enum StatusTarget{
+    INSTANCE = 0;
+    SERVICE = 1;
+    BOTH = 2;
+}
+
+message StatusRequest{
+    string app_id = 1;
+    string instance_uuid = 2;
+    string message = 3;
+    ServiceStatus status = 4;
+    StatusTarget target = 5;
+    AppVersion version = 6;
+}
+
+message DiscoveryResponse{
+    bool recorded = 1;
+}
+
+message ServiceLocation{
+    string app_id = 1;
+    string service_host = 2;
+    int32 service_port = 3;
+    ServiceStatus status = 4;
+    AppVersion version = 5;
+}
+
+service Discovery {
+    rpc Register(RegisterRequest) returns (DiscoveryResponse);
+    rpc DeRegister(DeRegisterRequest) returns (DiscoveryResponse);
+    rpc HeartBeat(HeartBeatRequest) returns (DiscoveryResponse);
+    rpc Status(StatusRequest) returns (DiscoveryResponse);
+    rpc GetLocation(LocationRequest) returns (ServiceLocation);
+}
