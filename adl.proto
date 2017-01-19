@@ -97,8 +97,15 @@ message ListRangeRequest{
     string member_id = 6;
 }
 
-message ListAddResponse{}
-message ListRemoveResponse{}
+message ListAddResponse{
+    bool success = 1;
+    string message = 2;
+}
+
+message ListRemoveResponse{
+    bool success = 1;
+    string message = 2;
+}
 
 service Adl{
     rpc Mutate(MutationRequest) returns (MutationResponse);
