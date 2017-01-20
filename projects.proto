@@ -36,7 +36,7 @@ enum InviteStatus{
 message CreateRequest{
     string id = 1;
     string name = 2;
-    string reseller_id = 3;
+    string distributor_id = 3;
     Mode mode = 4;
     Region region = 5;
 }
@@ -48,7 +48,7 @@ message RetrieveRequest{
 message ProjectResponse{
     string id = 1;
     string name = 2;
-    string reseller_id = 3;
+    string distributor_id = 3;
     Mode mode = 4;
     Region region = 5;
     google.protobuf.Timestamp created = 6;
