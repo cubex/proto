@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package domains;
+
+option go_package = "github.com/cubex/proto-go/domains";
+
+import "google/protobuf/timestamp.proto";
+
+message LookupRequest{
+    string domain = 1; //lower case domain e.g. example.com
+}
+
+message GetDomainsRequest{
+}
+
+message CreateRequest{
+    string domain = 1;
+}
+
+enum VerificationMode{
+    DNS = 0;
+    FILE = 1;
+    MANUAL = 2;
+}
+
+message DomainResponse {
+    string domain = 1;
+    string verification = 2;
+    string verification_mode = 3;
+    string is_verified = 4;
+    google.protobuf.Timestamp date_verified = 5;
+}
+
+message DomainsResponse{
+    map<string, DomainResponse> domains = 1;
+}
+
+message VerifyRequest{
+    string domain = 1; //Domain to verify
+}
+
+enum DomainServiceSchema{
+    HTTP = 0;
+    HTTPS = 1;
+}
+
+message DomainServiceResponse{
+    string domain = 1;
+    string subdomain = 2;
+    DomainServiceSchema default_schema = 3;
+    repeated DomainServiceSchema availble_schema = 4;
+    string handler_gaid = 5;
+    bool is_enabled = 6;
+}
+
+message SetServiceRequest{
+    string domain = 1;
+    string subdomain = 2;
+    string handler_gaid = 3;
+    DomainServiceSchema default_schema = 4;
+}
+
+message ServiceRequest{
+    string domain = 1;
+    string subdomain = 2;
+}
+
+message DomainServicesResponse{
+    map<string, DomainServiceResponse> services = 1;
+}
+
+service Domains{
+    rpc Create(CreateRequest) returns (DomainResponse);
+    rpc GetDomains(GetDomainsRequest) returns (DomainsResponse);
+    rpc Retrieve(LookupRequest) returns (DomainResponse);
+    rpc Verify(VerifyRequest) returns (DomainResponse);
+
+    rpc SetService(SetServiceRequest) returns (DomainServiceResponse);
+    rpc RetrieveService(ServiceRequest) returns (DomainServiceResponse);
+    rpc GetServices(ServiceRequest) returns (DomainServicesResponse);
+    rpc RemoveService(ServiceRequest) returns (DomainServiceResponse);
+    rpc DisableService(ServiceRequest) returns (DomainServiceResponse);
+    rpc EnableService(ServiceRequest) returns (DomainServiceResponse);
+}
