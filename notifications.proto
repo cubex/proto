@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package notifications;
+
+option go_package = "github.com/cubex/proto-go/notifications";
+
+import "google/protobuf/timestamp.proto";
+
+message NotificationRequest {
+    string notification_uid = 1;
+}
+
+message NotificationDataRequest {
+    string notification_id = 1; // vendor/app-id/notification-id
+    string notification_uid = 2; // only to be set when posting an update
+    repeated string target_id = 3; // user id / project id / vendor/app-id/role
+    int32 percentage = 4;
+    map<string, string> data = 5;
+}
+
+message NotificationResponse {
+    string notification_uid = 1;
+    string notification_id = 2;
+    int32 percentage = 3;
+    bool is_complete = 4;
+    google.protobuf.Timestamp started = 5;
+    google.protobuf.Timestamp last_update = 6;
+}
+
+message NotificationUpdateResponse {
+    string notification_uid = 1;
+    string message = 2;
+    bool success = 3;
+}
+
+service Notifications {
+    rpc Send (NotificationDataRequest) returns (NotificationUpdateResponse);
+    rpc Update (NotificationDataRequest) returns (NotificationUpdateResponse);
+    rpc Retrieve (NotificationRequest) returns (NotificationResponse);
+}
