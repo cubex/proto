@@ -5,6 +5,7 @@ package events;
 option go_package = "github.com/cubex/proto-go/events";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 message EventRequest {
     google.protobuf.Timestamp timestamp = 1;
