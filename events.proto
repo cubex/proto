@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package events;
+
+option go_package = "github.com/cubex/proto-go/events";
+
+import "google/protobuf/timestamp.proto";
+
+message EventRequest {
+    google.protobuf.Timestamp timestamp = 1;
+    string device_id = 2;
+    string advcanced_device_id = 3;
+    string user_id = 4;
+    string source = 5; //domain / global-app-id
+    string ip = 6;
+    string event_type_id = 7;
+    map<string, string> strings = 8;
+    map<string, google.protobuf.Timestamp> timestamps = 9;
+    map<string, google.protobuf.Duration> durations = 10;
+    map<string, bool> bools = 11;
+    map<string, float> floats = 12;
+    map<string, int64> integers = 13;
+    map<string, string> meta = 14;
+}
+
+message EventSubmittedResponse {
+    string event_id = 1;
+}
+
+service Events {
+    rpc FireEvent (EventRequest) returns (EventSubmittedResponse);
+}
