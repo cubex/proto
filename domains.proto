@@ -6,18 +6,18 @@ option go_package = "github.com/cubex/proto-go/domains";
 
 import "google/protobuf/timestamp.proto";
 
-message LookupRequest{
+message LookupRequest {
     string domain = 1; //lower case domain e.g. example.com
 }
 
-message GetDomainsRequest{
+message GetDomainsRequest {
 }
 
-message CreateRequest{
+message CreateRequest {
     string domain = 1;
 }
 
-enum VerificationMode{
+enum VerificationMode {
     DNS = 0;
     FILE = 1;
     MANUAL = 2;
@@ -31,20 +31,20 @@ message DomainResponse {
     google.protobuf.Timestamp date_verified = 5;
 }
 
-message DomainsResponse{
+message DomainsResponse {
     map<string, DomainResponse> domains = 1;
 }
 
-message VerifyRequest{
+message VerifyRequest {
     string domain = 1; //Domain to verify
 }
 
-enum DomainServiceSchema{
+enum DomainServiceSchema {
     HTTP = 0;
     HTTPS = 1;
 }
 
-message DomainServiceResponse{
+message DomainServiceResponse {
     string domain = 1;
     string subdomain = 2;
     DomainServiceSchema default_schema = 3;
@@ -53,32 +53,32 @@ message DomainServiceResponse{
     bool is_enabled = 6;
 }
 
-message SetServiceRequest{
+message SetServiceRequest {
     string domain = 1;
     string subdomain = 2;
     string handler_gaid = 3;
     DomainServiceSchema default_schema = 4;
 }
 
-message ServiceRequest{
+message ServiceRequest {
     string domain = 1;
     string subdomain = 2;
 }
 
-message DomainServicesResponse{
+message DomainServicesResponse {
     map<string, DomainServiceResponse> services = 1;
 }
 
-service Domains{
-    rpc Create(CreateRequest) returns (DomainResponse);
-    rpc GetDomains(GetDomainsRequest) returns (DomainsResponse);
-    rpc Retrieve(LookupRequest) returns (DomainResponse);
-    rpc Verify(VerifyRequest) returns (DomainResponse);
+service Domains {
+    rpc Create (CreateRequest) returns (DomainResponse);
+    rpc GetDomains (GetDomainsRequest) returns (DomainsResponse);
+    rpc Retrieve (LookupRequest) returns (DomainResponse);
+    rpc Verify (VerifyRequest) returns (DomainResponse);
 
-    rpc SetService(SetServiceRequest) returns (DomainServiceResponse);
-    rpc RetrieveService(ServiceRequest) returns (DomainServiceResponse);
-    rpc GetServices(ServiceRequest) returns (DomainServicesResponse);
-    rpc RemoveService(ServiceRequest) returns (DomainServiceResponse);
-    rpc DisableService(ServiceRequest) returns (DomainServiceResponse);
-    rpc EnableService(ServiceRequest) returns (DomainServiceResponse);
+    rpc SetService (SetServiceRequest) returns (DomainServiceResponse);
+    rpc RetrieveService (ServiceRequest) returns (DomainServiceResponse);
+    rpc GetServices (ServiceRequest) returns (DomainServicesResponse);
+    rpc RemoveService (ServiceRequest) returns (DomainServiceResponse);
+    rpc DisableService (ServiceRequest) returns (DomainServiceResponse);
+    rpc EnableService (ServiceRequest) returns (DomainServiceResponse);
 }

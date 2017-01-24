@@ -12,7 +12,7 @@ message SocketMessage {
 }
 
 message SubscribeMessage {
-    string session_id = 1;//Session to subscribe
+    string session_id = 1; //Session to subscribe
     string app_id = 2; //Global App ID
     string channel = 3; //Channel to subscribe them to
 }
@@ -23,7 +23,7 @@ message PublishResponse {
 }
 
 service Sockets {
-    rpc Publish(SocketMessage) returns (PublishResponse);
-    rpc Subscribe(SubscribeMessage) returns (PublishResponse);
-    rpc UnSubscribe(SubscribeMessage) returns (PublishResponse);
+    rpc Publish (SocketMessage) returns (PublishResponse);
+    rpc Subscribe (SubscribeMessage) returns (PublishResponse);
+    rpc UnSubscribe (SubscribeMessage) returns (PublishResponse);
 }

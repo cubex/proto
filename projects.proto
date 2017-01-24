@@ -11,21 +11,21 @@ enum Mode {
     PRODUCTION = 1;
 }
 
-enum Region{
+enum Region {
     GLOBAL = 0;
     US = 1;
     EUROPE = 2;
     ASIA = 3;
 }
 
-enum MemberType{
+enum MemberType {
     OWNER = 0;
     MEMBER = 1;
     VIEWER = 2;
     SUPPORT = 3;
 }
 
-enum InviteStatus{
+enum InviteStatus {
     PENDING = 0;
     ACCEPTED = 1;
     REJECTED = 2;
@@ -33,7 +33,7 @@ enum InviteStatus{
     NOT_FOUND = 4;
 }
 
-message CreateRequest{
+message CreateRequest {
     string id = 1;
     string name = 2;
     string distributor_id = 3;
@@ -41,11 +41,11 @@ message CreateRequest{
     Region region = 5;
 }
 
-message RetrieveRequest{
+message RetrieveRequest {
     string id = 1;
 }
 
-message ProjectResponse{
+message ProjectResponse {
     string id = 1;
     string name = 2;
     string distributor_id = 3;
@@ -54,26 +54,26 @@ message ProjectResponse{
     google.protobuf.Timestamp created = 6;
 }
 
-message AddMemberRequest{
+message AddMemberRequest {
     string member_id = 1; //Fident ID to use as member
     string project_id = 2;
     MemberType type = 3;
     google.protobuf.Timestamp expiry = 4;
 }
 
-message RemoveMemberRequest{
+message RemoveMemberRequest {
     string member_id = 1; //Fident ID to use as member
     string project_id = 2;
 }
 
-message InviteRequest{
+message InviteRequest {
     string email = 1;
     string project_id = 2;
     MemberType type = 3;
     google.protobuf.Timestamp expiry = 4;
 }
 
-message InviteStatusResponse{
+message InviteStatusResponse {
     string email = 1;
     InviteStatus status = 2;
     string verification = 3; //Unique Key for this invite
@@ -81,7 +81,7 @@ message InviteStatusResponse{
     google.protobuf.Timestamp actioned = 5; //time accepted, rejected or expired
 }
 
-message ActionInviteRequest{
+message ActionInviteRequest {
     string email = 1;
     string project_id = 2;
     string member_id = 3; //Fident ID to use as member
@@ -89,7 +89,7 @@ message ActionInviteRequest{
     string verification = 5; //Unique Key to verify
 }
 
-message MemberStatusResponse{
+message MemberStatusResponse {
     string member_id = 1;
     string project_id = 2;
     MemberType type = 3;
@@ -99,29 +99,29 @@ message MemberStatusResponse{
     google.protobuf.Timestamp detached = 7;
 }
 
-message GetMembersRequest{
+message GetMembersRequest {
     string project_id = 1;
 }
 
-message GetProjectsRequest{
+message GetProjectsRequest {
     string member_id = 1;
 }
 
-message MembersResponse{
+message MembersResponse {
     map<string, MemberStatusResponse> members = 1;
 }
 
-message ProjectsResponse{
+message ProjectsResponse {
     map<string, ProjectResponse> projects = 1;
 }
 
-service Projects{
-    rpc Create(CreateRequest) returns (ProjectResponse);
-    rpc Retrieve(RetrieveRequest) returns (ProjectResponse);
-    rpc GetProjects(GetProjectsRequest) returns (ProjectsResponse);
-    rpc AddMember(AddMemberRequest) returns (MemberStatusResponse);
-    rpc RemoveMember(RemoveMemberRequest) returns (MemberStatusResponse);
-    rpc GetMembers(GetMembersRequest) returns (MembersResponse);
-    rpc Invite(InviteRequest) returns (InviteStatusResponse);
-    rpc ActionInvite(ActionInviteRequest) returns (MemberStatusResponse);
+service Projects {
+    rpc Create (CreateRequest) returns (ProjectResponse);
+    rpc Retrieve (RetrieveRequest) returns (ProjectResponse);
+    rpc GetProjects (GetProjectsRequest) returns (ProjectsResponse);
+    rpc AddMember (AddMemberRequest) returns (MemberStatusResponse);
+    rpc RemoveMember (RemoveMemberRequest) returns (MemberStatusResponse);
+    rpc GetMembers (GetMembersRequest) returns (MembersResponse);
+    rpc Invite (InviteRequest) returns (InviteStatusResponse);
+    rpc ActionInvite (ActionInviteRequest) returns (MemberStatusResponse);
 }

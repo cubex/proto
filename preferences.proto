@@ -18,7 +18,7 @@ message PreferenceResponse {
 }
 
 service Preferences {
-    rpc Mutate(Preference) returns (PreferenceResponse);
-    rpc Retrieve(Preference) returns (PreferenceResponse);
-    rpc Delete(Preference) returns (PreferenceResponse);
+    rpc Mutate (Preference) returns (PreferenceResponse);
+    rpc Retrieve (Preference) returns (PreferenceResponse);
+    rpc Delete (Preference) returns (PreferenceResponse);
 }

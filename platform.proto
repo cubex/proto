@@ -5,7 +5,7 @@ package platform;
 option go_package = "github.com/cubex/proto-go/platform";
 
 message HTTPRequest {
-    message HTTPParameter{
+    message HTTPParameter {
         repeated string values = 1;
     }
     string path = 1;
@@ -16,7 +16,7 @@ message HTTPRequest {
     string language = 6;
     string content_type = 7;
 
-    enum RequestType{
+    enum RequestType {
         REQUEST = 0;
         PAGE_DEFINITION = 1;
     }
@@ -24,18 +24,18 @@ message HTTPRequest {
     RequestType request_type = 8;
 }
 
-message HTTPResponse{
+message HTTPResponse {
     int32 status_code = 1;
     string body = 2;
     string content_type = 3;
     string language = 4;
-    message HTTPHeaderParameter{
+    message HTTPHeaderParameter {
         repeated string values = 1;
     }
     map<string, HTTPHeaderParameter> headers = 5;
 }
 
-enum SocketAction{
+enum SocketAction {
     SUBSCRIBE = 0;
     UNSUBSCRIBE = 1;
 }
@@ -46,7 +46,7 @@ message SocketRequest {
     string payload = 3;
 }
 
-service cubexPlatform{
-    rpc HandleHTTPRequest(HTTPRequest) returns (HTTPResponse);
-    rpc HandleSocketAction(SocketRequest) returns (HTTPResponse);
+service cubexPlatform {
+    rpc HandleHTTPRequest (HTTPRequest) returns (HTTPResponse);
+    rpc HandleSocketAction (SocketRequest) returns (HTTPResponse);
 }

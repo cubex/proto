@@ -8,7 +8,7 @@ message HTTPRequest {
     string host = 1;
     string path = 2;
     string method = 3;
-    message HTTPParameter{
+    message HTTPParameter {
         repeated string values = 1;
     }
     map<string, HTTPParameter> post_params = 4;
@@ -18,7 +18,7 @@ message HTTPRequest {
     string language = 8;
     string content_type = 9;
     string project_id = 10;
-    message UserInformation{
+    message UserInformation {
         string user_id = 1;
         string user_fid = 2;
         string name = 3;
@@ -27,17 +27,17 @@ message HTTPRequest {
     UserInformation user = 11;
 }
 
-message HTTPResponse{
+message HTTPResponse {
     int32 status_code = 1;
     string body = 2;
     string content_type = 3;
     string language = 4;
-    message HTTPHeaderParameter{
+    message HTTPHeaderParameter {
         repeated string values = 1;
     }
     map<string, HTTPHeaderParameter> headers = 5;
 }
 
-service MetaRoute{
-    rpc HandleHTTPRequest(HTTPRequest) returns (HTTPResponse);
+service MetaRoute {
+    rpc HandleHTTPRequest (HTTPRequest) returns (HTTPResponse);
 }
