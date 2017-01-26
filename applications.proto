@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package platform;
+package applications;
 
-option go_package = "github.com/cubex/proto-go/platform";
+option go_package = "github.com/cubex/proto-go/applications";
 
 message HTTPRequest {
     message HTTPParameter {
@@ -46,7 +46,27 @@ message SocketRequest {
     string payload = 3;
 }
 
-service cubexPlatform {
+message ProjectModifyRequest {
+    string project_id = 1;
+    enum ModifyMode {
+        UNKNOWN = 0;
+        INSTALL = 1;
+        UNINSTALL = 2;
+        SUSPEND = 3;
+        REACTIVATE = 4;
+        CANCEL = 5;
+        BILLING = 6;
+    }
+    ModifyMode mode = 2;
+    map<string, string> data = 3;
+}
+
+message ProjectModifyResponse {
+    bool success = 1;
+}
+
+service Application {
     rpc HandleHTTPRequest (HTTPRequest) returns (HTTPResponse);
     rpc HandleSocketAction (SocketRequest) returns (HTTPResponse);
+    rpc ModifyRelationship (ProjectModifyRequest) returns (ProjectModifyResponse);
 }
