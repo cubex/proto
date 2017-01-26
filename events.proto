@@ -11,17 +11,18 @@ message EventRequest {
     google.protobuf.Timestamp timestamp = 1;
     string session_id = 2;
     string device_id = 3;
-    string user_id = 4;
-    string source = 5; //domain / global-app-id
-    string ip = 6;
-    string event_type_id = 7;
-    map<string, string> strings = 8;
-    map<string, google.protobuf.Timestamp> timestamps = 9;
-    map<string, google.protobuf.Duration> durations = 10;
-    map<string, bool> bools = 11;
-    map<string, float> floats = 12;
-    map<string, int64> integers = 13;
-    map<string, string> meta = 14;
+    string fingerprint_id = 4;
+    string user_id = 5;
+    string source = 6; //domain / global-app-id
+    string ip = 7;
+    string event_type_id = 8;
+    map<string, string> strings = 9;
+    map<string, google.protobuf.Timestamp> timestamps = 10;
+    map<string, google.protobuf.Duration> durations = 11;
+    map<string, bool> bools = 12;
+    map<string, float> floats = 13;
+    map<string, int64> integers = 14;
+    map<string, string> meta = 15;
 }
 
 message EventSubmittedResponse {
