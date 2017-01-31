@@ -101,8 +101,10 @@ message ListRangeRequest {
     string list_name = 2;
     string start_key = 3;
     string end_key = 4;
-    int32 limit = 5;
-    string member_id = 6;
+    bool reverse = 5;
+    int32 limit = 6;
+    string member_id = 7;
+   
 }
 
 message ListAddResponse {
