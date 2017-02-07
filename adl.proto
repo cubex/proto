@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package fdl;
+package adl;
 
 option go_package = "github.com/cubex/proto-go/adl";
 
@@ -104,7 +104,7 @@ message ListRangeRequest {
     bool reverse = 5;
     int32 limit = 6;
     string member_id = 7;
-   
+
 }
 
 message ListAddResponse {
