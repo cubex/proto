@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package pxl;
+
+option go_package = "github.com/cubex/proto-go/pxl";
+
+enum Platform {
+    UNKNOWN_PLATFORM = 0;
+    DESKTOP = 1;
+    MOBILE = 2;
+    TABLET = 3;
+    TV = 4;
+    CONSOLE = 5;
+    CAMERA = 6;
+    BOT = 7;
+    SERVER = 8;
+    WATCH = 9;
+    IOT = 10; //Fridge, Speaker
+}
+
+message Device {
+    string device_id = 1;
+    IPInformation ip = 2;
+    Platform platform = 3;
+    DeviceClient client = 4;
+    string cpu_brand = 5; //intel
+    string cpu_arc = 6; //x86
+    string brand = 7; //samsung, microsoft apple
+    string model = 8; //galaxy nx, xbox one, iphone
+    string model_version = 9;
+}
+
+message IPInformation {
+    string ip = 1;
+    string isp = 2;
+    string organisation = 3;
+    string as_number = 4;
+    string net_speed = 5;
+    string user_type = 6;
+}
+
+message OperatingSystem {
+    enum Type {
+        OTHER_OS = 0;
+        WINDOWS = 1;
+        MAC = 2;
+        LINUX = 3;
+        ANDROID = 4;
+        IOS = 5;
+        CHROME_OS = 6;
+        BLACKBERRY = 7;
+    }
+    string brand = 1; //Microsoft, Apple, Debian
+    Type type = 2; //Windows, Linux, Mac
+    string type_specific = 3;
+    string version = 4;
+}
+
+message DeviceClient {
+    enum Type {
+        UNKNOWN_CLIENT = 0;
+        BROWSER = 1;
+        APPLICATION = 2;
+        EMAIL = 3;
+        FEED_READER = 4;
+        BOT = 5;
+        CRAWLER = 6;
+        LINK_CHECKER = 7;
+        VALIDATOR = 8;
+        CONSOLE = 9;
+        STATUS = 10; //Pingdom
+        IOT = 11;
+    }
+    string brand = 1; //Google
+    string product = 2; //Chrome / Search Bot
+    string version = 3;
+    Type type = 4;
+}
+
+message Location {
+    double longitude = 1;
+    double latitude = 2;
+    string continent = 3; //Europe / North America
+    string sovereign_state = 4; // United Kingdom / United States
+    string country = 5; // England / United States
+    string region = 6; //South West
+    string state = 7; //Devon / Arizona
+    string borough = 8; //Torbay / Maricopa County
+    string town = 9; // Paignton / Tempe
+    string suburb = 10; //Preston / -
+    string postal = 11; //TQ3 7 / 85281
+}
