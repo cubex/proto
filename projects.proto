@@ -107,6 +107,19 @@ message GetProjectsRequest {
     string member_id = 1;
 }
 
+message GetInvitesRequest {
+    string member_id = 1;
+}
+
+message InvitesResponse {
+    repeated InviteResponse invites = 1;
+}
+
+message InviteResponse {
+    ProjectResponse project = 1;
+    InviteStatusResponse status = 2;
+}
+
 message MembersResponse {
     map<string, MemberStatusResponse> members = 1;
 }
@@ -122,6 +135,7 @@ service Projects {
     rpc AddMember (AddMemberRequest) returns (MemberStatusResponse);
     rpc RemoveMember (RemoveMemberRequest) returns (MemberStatusResponse);
     rpc GetMembers (GetMembersRequest) returns (MembersResponse);
+    rpc GetInvites (GetInvitesRequest) returns (InvitesResponse);
     rpc Invite (InviteRequest) returns (InviteStatusResponse);
     rpc ActionInvite (ActionInviteRequest) returns (MemberStatusResponse);
 }
